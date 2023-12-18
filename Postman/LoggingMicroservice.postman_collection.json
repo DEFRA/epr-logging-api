@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "e074a460-eb26-4540-8bc8-28f9835f84c6",
+		"name": "Logging Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13794420"
+	},
+	"item": [
+		{
+			"name": "Create Event",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"7b0b6f12-2e1a-4d18-b211-a891afcbb017\",\n    \"sessionId\": \"97af8e4c-cc48-4684-a36c-2ef33f77b3da\",\n    \"dateTime\": \"2013-10-21T13:28:06.419Z\",\n    \"component\": \"Submission Status API\",\n    \"ip\": \"10.0.1.1\",\n    \"pmcCode\": \"0703\",\n    \"priority\": 0,\n    \"details\": {\n        \"transactionCode\": \"EPR_DOWNLOAD_BLOCKED\",\n        \"message\": \"New submission created\",\n        \"additionalInfo\": \"<submissionId?>\"\n    }\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7266/api/v1/log-events",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7266",
+					"path": [
+						"api",
+						"v1",
+						"log-events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Fails for Empty GUIDs",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"00000000-0000-0000-0000-000000000000\",\n    \"sessionId\": \"00000000-0000-0000-0000-000000000000\",\n    \"dateTime\": \"2013-10-21T13:28:06.419Z\",\n    \"component\": \"Submission Status API\",\n    \"ip\": \"10.0.1.1\",\n    \"pmcCode\": \"0703\",\n    \"priority\": 0,\n    \"details\": {\n        \"transactionCode\": \"EPR_DOWNLOAD_BLOCKED\",\n        \"message\": \"New submission created\",\n        \"additionalInfo\": \"<submissionId?>\"\n    }\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7266/api/v1/log-events",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7266",
+					"path": [
+						"api",
+						"v1",
+						"log-events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event Fails for missing required parameters",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7266/api/v1/log-events",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7266",
+					"path": [
+						"api",
+						"v1",
+						"log-events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5292/admin/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5292",
+					"path": [
+						"admin",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
