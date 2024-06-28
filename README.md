@@ -26,7 +26,7 @@ those events and sends them to a Service Bus Queue
 
 ### Prerequisites
 In order to run the service you will need the following dependencies
-- .NET 6
+- .NET 8
 
 #### epr-packaging-common
 ##### Developers working for a DEFRA supplier

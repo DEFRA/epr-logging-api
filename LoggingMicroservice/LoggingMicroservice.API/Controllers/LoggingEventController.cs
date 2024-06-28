@@ -1,6 +1,7 @@
 ﻿namespace LoggingMicroservice.API.Controllers;
 
 using System.Net;
+using Asp.Versioning;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
