@@ -10,7 +10,7 @@ FROM defradigital/dotnetcore-development:dotnet6.0 AS build
 USER root
 WORKDIR /src
 COPY ["LoggingMicroservice.API/LoggingMicroservice.API.csproj", "LoggingMicroservice.API/"]
-COPY ["stylecop.ruleset"]
+COPY ["stylecop.ruleset", ""]
 COPY ["NuGet.Config", ""]
  
 ARG PAT=""
