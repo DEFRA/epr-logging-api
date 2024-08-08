@@ -19,7 +19,6 @@ RUN sed -i "s|</configuration>|<packageSourceCredentials><epr-packaging-common><
 RUN dotnet restore "LoggingMicroservice.API/LoggingMicroservice.API.csproj" --configfile "./NuGet.Config"
  
 COPY LoggingMicroservice.API/. ./LoggingMicroservice.API/.
-COPY LoggingMicroservice.Core/. ./LoggingMicroservice.Core/.
 WORKDIR "/src/LoggingMicroservice.API"
 RUN dotnet build "LoggingMicroservice.API.csproj" -c Release -o /app/build
 
