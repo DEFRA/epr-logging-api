@@ -11,6 +11,8 @@ COPY --chown=dotnet stylecop.ruleset ./
 COPY --chown=dotnet NuGet.Config ./
 COPY --chown=dotnet Directory.Build.props ./
 
+RUN find /home/dotnet/LoggingMicroservice.API -type f -name "*.dll" -exec chmod 0555 {} \;
+
 RUN dotnet restore "LoggingMicroservice.API/LoggingMicroservice.API.csproj" --configfile "NuGet.Config"
 
 # Build and publish a release
