@@ -25,7 +25,10 @@ USER dotnet
 
 COPY --from=build-env --chown=dotnet /home/dotnet/LoggingMicroservice.API/out .
 
-RUN chmod -R a-w .
+RUN chown -R dotnet:dotnet /home/dotnet
+RUN chmod -R go-w /home/dotnet
+
+RUN chmod a-w /home/dotnet/LoggingMicroservice.API.dll
 
 # Expose the app on a defined port, configurable via a build argument
 ARG PORT=3000
