@@ -23,6 +23,6 @@ FROM defradigital/dotnetcore:dotnet6.0
 # Switch to the non-root user
 USER dotnet
 
-COPY --from=build-env --chown=dotnet app/out .
+COPY --from=build-env app/out .
 
 CMD dotnet LoggingMicroservice.API.dll
