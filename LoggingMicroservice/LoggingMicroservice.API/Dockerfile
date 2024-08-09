@@ -11,8 +11,6 @@ COPY --chown=dotnet stylecop.ruleset ./
 COPY --chown=dotnet NuGet.Config ./
 COPY --chown=dotnet Directory.Build.props ./
 
-RUN find /home/dotnet/LoggingMicroservice.API -type f -name "*.dll" -exec chmod 0555 {} \;
-
 RUN dotnet restore "LoggingMicroservice.API/LoggingMicroservice.API.csproj" --configfile "NuGet.Config"
 
 # Build and publish a release
@@ -26,6 +24,8 @@ FROM defradigital/dotnetcore:dotnet6.0
 USER dotnet
 
 COPY --from=build-env --chown=dotnet /home/dotnet/LoggingMicroservice.API/out .
+
+RUN chmod -R a-w .
 
 # Expose the app on a defined port, configurable via a build argument
 ARG PORT=3000
