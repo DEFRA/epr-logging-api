@@ -1,15 +1,15 @@
-FROM defradigital/dotnetcore-development:dotnet8.0 AS build-env
-
+﻿FROM defradigital/dotnetcore-development:dotnet8.0 AS build-env
+USER root
 # Expose the app on a defined port, configurable via a build argument
 ARG PORT=3000
 ENV ASPNETCORE_URLS=http://*:${PORT}
 EXPOSE ${PORT}
 
 # Copy everything
-COPY --chown=dotnet LoggingMicroservice.API/. ./LoggingMicroservice.API/.
-COPY --chown=dotnet stylecop.ruleset ./
-COPY --chown=dotnet NuGet.Config ./
-COPY --chown=dotnet Directory.Build.props ./
+COPY LoggingMicroservice.API/. ./LoggingMicroservice.API/.
+COPY stylecop.ruleset ./
+COPY NuGet.Config ./
+COPY Directory.Build.props ./
 
 RUN dotnet restore "LoggingMicroservice.API/LoggingMicroservice.API.csproj" --configfile "NuGet.Config"
 
@@ -23,7 +23,7 @@ FROM defradigital/dotnetcore:dotnet8.0
 # Switch to the non-root user
 USER dotnet
 
-COPY --from=build-env --chown=dotnet /home/dotnet/LoggingMicroservice.API/out .
+COPY --from=build-env /home/dotnet/LoggingMicroservice.API/out .
 
 # Expose the app on a defined port, configurable via a build argument
 ARG PORT=3000
