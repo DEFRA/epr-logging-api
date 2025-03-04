@@ -2,6 +2,7 @@
     <PropertyGroup>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <RootNamespace>LoggingMicroservice.API</RootNamespace>
+        <UserSecretsId>2a4603bf-c83d-44b2-b6fe-42eadd80d51d</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
