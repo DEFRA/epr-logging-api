@@ -26,6 +26,8 @@ public class LoggingEventController : ControllerBase
 
     [HttpPost(Name = "Create Event")]
     [Consumes("application/json")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateEvent([FromBody] LoggingEvent request)
     {
         try
