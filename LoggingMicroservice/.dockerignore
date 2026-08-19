@@ -1,0 +1,13 @@
+.git
+.gitignore
+.idea
+
+**/bin/
+**/obj/
+TestResults/
+*.user
+*.suo
+*.DotSettings.user
+
+Dockerfile*
+README.md

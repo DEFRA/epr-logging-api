@@ -1,33 +1,30 @@
-﻿FROM defradigital/dotnetcore-development:dotnet10.0 AS build-env
+FROM defradigital/dotnetcore-development:dotnet10.0 AS build-env
 USER root
-# Expose the app on a defined port, configurable via a build argument
-ARG PORT=3000
-ENV ASPNETCORE_URLS=http://*:${PORT}
-EXPOSE ${PORT}
+WORKDIR /src
 
-# Copy everything
-COPY LoggingMicroservice.API/. ./LoggingMicroservice.API/.
-COPY stylecop.ruleset ./
-COPY NuGet.Config ./
-COPY Directory.Build.props ./
+# Copy restore inputs first so dependency restore remains cached when source changes.
+COPY ["LoggingMicroservice.API/LoggingMicroservice.API.csproj", "LoggingMicroservice.API/"]
+COPY ["Directory.Build.props", "stylecop.ruleset", "NuGet.Config", "./"]
 
 RUN dotnet restore "LoggingMicroservice.API/LoggingMicroservice.API.csproj" --configfile "NuGet.Config"
 
-# Build and publish a release
-WORKDIR /home/dotnet/LoggingMicroservice.API
-RUN dotnet publish -c Release -o out
+COPY LoggingMicroservice.API/. LoggingMicroservice.API/.
+RUN dotnet publish "LoggingMicroservice.API/LoggingMicroservice.API.csproj" \
+    --no-restore \
+    --configuration Release \
+    --output /app/publish \
+    /p:UseAppHost=false
 
-# Build runtime image
+# Keep the runtime image minimal; this image contains the ASP.NET Core runtime only.
 FROM defradigital/dotnetcore:dotnet10.0
 
-# Switch to the non-root user
 USER dotnet
+WORKDIR /app
 
-COPY --from=build-env /home/dotnet/LoggingMicroservice.API/out .
+COPY --from=build-env /app/publish .
 
-# Expose the app on a defined port, configurable via a build argument
 ARG PORT=3000
 ENV ASPNETCORE_URLS=http://*:${PORT}
 EXPOSE ${PORT}
 
-CMD dotnet LoggingMicroservice.API.dll
+ENTRYPOINT ["dotnet", "LoggingMicroservice.API.dll"]
