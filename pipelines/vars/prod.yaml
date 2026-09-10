@@ -1,6 +1,12 @@
 variables:
-  azureSubscription: AZR-RWD-PRD1
-  docker.imageName: protectivemonitoringapi
-  acr.azureContainerRegistryName: prdrwdinfac1401
-  acr.repositoryName: protectivemonitoringapirepository
-  serviceName: prdrwdwebwa1403
+- group: ServiceConnections
+- name: azureSubscription
+  value: $(ServiceConnectionPRD1)
+- name: docker.imageName
+  value: protectivemonitoringapi
+- name: acr.azureContainerRegistryName
+  value: prdrwdinfac1401
+- name: acr.repositoryName
+  value: protectivemonitoringapirepository
+- name: serviceName
+  value: prdrwdwebwa1403
