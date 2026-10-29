@@ -1,6 +1,12 @@
 variables:
-  azureSubscription: AZD-RWD-DEV7
-  docker.imageName: protectivemonitoringapi
-  acr.azureContainerRegistryName: devrwdinfac1401
-  acr.repositoryName: protectivemonitoringapirepository
-  serviceName: devrwdwebwa7403
+- group: ServiceConnections
+- name: azureSubscription
+  value: $(ServiceConnectionDEV7)
+- name: docker.imageName
+  value: protectivemonitoringapi
+- name: acr.azureContainerRegistryName
+  value: devrwdinfac1401
+- name: acr.repositoryName
+  value: protectivemonitoringapirepository
+- name: serviceName
+  value: devrwdwebwa7403
